@@ -37,6 +37,12 @@ final class LLMInferenceService: ObservableObject {
 
   @Published private(set) var loadState = LLMLoadState.unloaded
 
+  nonisolated static func generationBudget(promptTokens: Int, batchSize: Int, contextSize: Int) -> Int? {
+    guard promptTokens <= batchSize else { return nil }
+    let budget = contextSize - promptTokens - self.contextReserveTokens
+    return budget > 0 ? budget : nil
+  }
+
   func loadModel(variant: LLMModelVariant, path: String) async {
     guard self.loadState != .loading else { return }
     self.loadState = .loading
@@ -192,19 +198,25 @@ final class LLMInferenceService: ObservableObject {
     let tokens = self.tokenize(vocab: vocab, prompt: promptString)
     guard !tokens.isEmpty else { return nil }
 
+    let batchSize = Int(llama_n_batch(context))
+    guard
+      let maxTokens = self.generationBudget(
+        promptTokens: tokens.count,
+        batchSize: batchSize,
+        contextSize: variant.contextSize,
+      )
+    else {
+      DiagnosticLog.write("llm: prompt \(tokens.count) tok refused, batch \(batchSize), ctx \(variant.contextSize)")
+      return nil
+    }
+    DiagnosticLog.write("llm: prompt=\(tokens.count) tok, budget=\(maxTokens) tok, ctx=\(variant.contextSize)")
+
     llama_memory_clear(llama_get_memory(context), true)
 
     var batch = llama_batch_init(Int32(tokens.count), 0, 1)
     defer { llama_batch_free(batch) }
 
     guard self.decodePrompt(context: context, batch: &batch, tokens: tokens) else { return nil }
-
-    let maxTokens = variant.contextSize - tokens.count - self.contextReserveTokens
-    guard maxTokens > 0 else {
-      DiagnosticLog.write("llm: prompt \(tokens.count) tok exceeds ctx \(variant.contextSize)")
-      return nil
-    }
-    DiagnosticLog.write("llm: prompt=\(tokens.count) tok, budget=\(maxTokens) tok, ctx=\(variant.contextSize)")
 
     guard
       let generated = self.generateTokens(

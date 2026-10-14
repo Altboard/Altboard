@@ -430,5 +430,6 @@ struct SharedSettings {
   private static let registration: Void = UserDefaults.standard.register(defaults: [
     SharedKey.showGlobeKey: true,
     SharedKey.keyboardHapticsEnabled: true,
+    SharedKey.needsInputModeSwitchKey: true,
   ])
 }

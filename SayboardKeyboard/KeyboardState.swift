@@ -103,6 +103,7 @@ final class KeyboardState: ObservableObject {
     self.longPressLLMAction = self.settings.longPressLLMAction
     self.disabledLLMActions = self.settings.disabledLLMActions
     self.showGlobeKey = self.settings.showGlobeKey
+    self.needsInputModeSwitchKey = self.settings.needsInputModeSwitchKey
     self.keyboardHapticsEnabled = self.settings.keyboardHapticsEnabled
     self.syncDictationLock()
     self.checkDiskSpace()

@@ -68,8 +68,6 @@ final class KeyboardViewController: UIInputViewController {
       self.setupKeyboardView()
     }
     self.keyboardState.refresh()
-    self.keyboardState.needsInputModeSwitchKey = self.needsInputModeSwitchKey
-    SharedSettings().needsInputModeSwitchKey = self.needsInputModeSwitchKey
     self.keyboardState.isTranslationMode = SharedSettings().isTranslationMode
     self.updateKeyboardHeight(actionBarVisible: false)
     self.syncFullAccessIfChanged()
@@ -78,8 +76,7 @@ final class KeyboardViewController: UIInputViewController {
     self.keyboardState.appearedAt = CFAbsoluteTimeGetCurrent()
     saveHostBundleId()
     self.keyboardState.syncOnboardingPractice(hostProcessID: self.hostProcess?.pid)
-    self.insertTranscribedText()
-    self.checkForPendingLLMResult()
+    self.hasDeferredAppearanceInsert = true
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -144,6 +141,7 @@ final class KeyboardViewController: UIInputViewController {
   private var staleFallbackTimer: Timer?
   private var lastSyncedFullAccess = false
   private var hasPerformedInitialFullAccessSync = false
+  private var hasDeferredAppearanceInsert = false
   private let pingValidator = PingValidator()
 
   private func syncFullAccessIfChanged() {
@@ -505,5 +503,33 @@ extension KeyboardViewController {
     } else {
       self.openURL(url)
     }
+  }
+}
+
+extension KeyboardViewController {
+
+  override func textDidChange(_ textInput: (any UITextInput)?) {
+    super.textDidChange(textInput)
+    self.syncInputModeSwitchKey()
+    self.insertDeferredAppearanceText()
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    self.insertDeferredAppearanceText()
+  }
+
+  private func syncInputModeSwitchKey() {
+    let needsKey = self.needsInputModeSwitchKey
+    guard needsKey != self.keyboardState.needsInputModeSwitchKey else { return }
+    self.keyboardState.needsInputModeSwitchKey = needsKey
+    SharedSettings().needsInputModeSwitchKey = needsKey
+  }
+
+  private func insertDeferredAppearanceText() {
+    guard self.hasDeferredAppearanceInsert else { return }
+    self.hasDeferredAppearanceInsert = false
+    self.insertTranscribedText()
+    self.checkForPendingLLMResult()
   }
 }

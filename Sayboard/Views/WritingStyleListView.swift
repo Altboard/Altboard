@@ -102,7 +102,7 @@ struct WritingStyleListView: View {
       .overlay {
         Image("icon-grid")
           .resizable()
-          .aspectRatio(contentMode: .fit)
+          .scaledToFit()
           .frame(width: 20, height: 20)
           .foregroundStyle(.white)
       }
@@ -243,7 +243,7 @@ struct WritingStyleListView: View {
     AsyncImage(url: url) { image in
       image
         .resizable()
-        .aspectRatio(contentMode: .fill)
+        .scaledToFill()
     } placeholder: {
       RoundedRectangle(cornerRadius: Self.iconCornerRadius, style: .continuous)
         .fill(.quaternary)

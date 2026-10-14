@@ -123,7 +123,7 @@ struct DefaultStylePickerView: View {
     AsyncImage(url: url) { image in
       image
         .resizable()
-        .aspectRatio(contentMode: .fill)
+        .scaledToFill()
     } placeholder: {
       RoundedRectangle(cornerRadius: Self.iconCornerRadius, style: .continuous)
         .fill(.quaternary)

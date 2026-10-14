@@ -123,6 +123,17 @@ private struct ModelSelectionObserver: ViewModifier {
   }
 }
 
+@MainActor
+private final class AppServices {
+  let speechService = SpeechRecognitionService()
+  let playerService = AudioPlayerService()
+  let downloadService = ModelDownloadService()
+  let permissionService = PermissionService()
+  let llmDownloadService = LLMDownloadService()
+  let llmCoordinator = LLMProcessingCoordinator()
+  let pipTutorialService = PiPTutorialService()
+}
+
 @main
 struct SayboardApp: App {
 
@@ -144,22 +155,66 @@ struct SayboardApp: App {
     #if APPSTORE
     PurchaseService.shared.start()
     #endif
-
-    let preShowHint = settings.hostBundleId == nil && settings.isKeyboardRequestRecent()
-    self._showsHostReturnHint = State(initialValue: preShowHint)
     Self.markOnboardingCompleteForEstablishedInstall()
-    self._isOnboardingPresented = State(initialValue: Self.shouldPresentOnboarding)
   }
 
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
   var body: some Scene {
     WindowGroup {
-      self.rootView
-        .onReceive(NotificationCenter.default.publisher(for: .appLanguageChangeRequested)) { notification in
-          self.handleLanguageChange(notification)
-        }
+      SayboardRootView(services: self.services.object)
     }
+  }
+
+  @StateObject private var services = UnobservedOwner(AppServices())
+
+  private static func markOnboardingCompleteForEstablishedInstall() {
+    guard !UserDefaults.standard.bool(forKey: SharedKey.hasCompletedOnboarding) else { return }
+    let hasRecord = UserDefaults.standard.data(forKey: SharedKey.onboardingRecord) != nil
+    let hasModel = ModelVariant.allCases.contains(where: ModelStorageManager.isDownloaded)
+    let hasHistory = !((try? HistoryStore.shared.readRecords()) ?? []).isEmpty
+    guard
+      OnboardingGate.marksCompleteForEstablishedInstall(
+        hasRecord: hasRecord,
+        hasModel: hasModel,
+        hasHistory: hasHistory,
+      )
+    else {
+      return
+    }
+    UserDefaults.standard.set(true, forKey: SharedKey.hasCompletedOnboarding)
+  }
+
+  private static func configureDefaultLanguageIfNeeded() {
+    let defaults = UserDefaults.standard
+    guard defaults.string(forKey: SharedKey.appLanguage) == nil else { return }
+    defaults.set(
+      AppLanguageConfig.resolveLanguage(from: Locale.preferredLanguages),
+      forKey: SharedKey.appLanguage,
+    )
+  }
+}
+
+private struct SayboardRootView: View {
+
+  init(services: AppServices) {
+    self.services = services
+    self._speechService = ObservedObject(wrappedValue: services.speechService)
+    self._playerService = ObservedObject(wrappedValue: services.playerService)
+    self._permissionService = ObservedObject(wrappedValue: services.permissionService)
+    self._llmCoordinator = ObservedObject(wrappedValue: services.llmCoordinator)
+    self._pipTutorialService = ObservedObject(wrappedValue: services.pipTutorialService)
+    let settings = SharedSettings()
+    let preShowHint = settings.hostBundleId == nil && settings.isKeyboardRequestRecent()
+    self._showsHostReturnHint = State(initialValue: preShowHint)
+    self._isOnboardingPresented = State(initialValue: Self.shouldPresentOnboarding)
+  }
+
+  var body: some View {
+    self.rootView
+      .onReceive(NotificationCenter.default.publisher(for: .appLanguageChangeRequested)) { notification in
+        self.handleLanguageChange(notification)
+      }
   }
 
   private static let defaultLanguage = AppLanguageConfig.fallback
@@ -176,13 +231,11 @@ struct SayboardApp: App {
     !UserDefaults.standard.bool(forKey: SharedKey.hasCompletedOnboarding)
   }
 
-  @StateObject private var speechService = SpeechRecognitionService()
-  @StateObject private var playerService = AudioPlayerService()
-  @StateObject private var downloadServiceOwner = UnobservedOwner(ModelDownloadService())
-  @StateObject private var permissionService = PermissionService()
-  @StateObject private var llmDownloadServiceOwner = UnobservedOwner(LLMDownloadService())
-  @StateObject private var llmCoordinator = LLMProcessingCoordinator()
-  @StateObject private var pipTutorialService = PiPTutorialService()
+  @ObservedObject private var speechService: SpeechRecognitionService
+  @ObservedObject private var playerService: AudioPlayerService
+  @ObservedObject private var permissionService: PermissionService
+  @ObservedObject private var llmCoordinator: LLMProcessingCoordinator
+  @ObservedObject private var pipTutorialService: PiPTutorialService
   @AppStorage(SharedKey.appLanguage) private var appLanguage = defaultLanguage
   @Environment(\.scenePhase) private var scenePhase
   @State private var isChangingLanguage = false
@@ -190,12 +243,14 @@ struct SayboardApp: App {
   @State private var showsHostReturnHint = false
   @State private var isOnboardingPresented = false
 
+  private let services: AppServices
+
   private var downloadService: ModelDownloadService {
-    self.downloadServiceOwner.object
+    self.services.downloadService
   }
 
   private var llmDownloadService: LLMDownloadService {
-    self.llmDownloadServiceOwner.object
+    self.services.llmDownloadService
   }
 
   private var rootView: some View {
@@ -272,32 +327,6 @@ struct SayboardApp: App {
     .opacity(self.isChangingLanguage ? 1 : 0)
     .animation(self.isChangingLanguage ? nil : .easeOut(duration: Self.overlayFadeDuration), value: self.isChangingLanguage)
     .allowsHitTesting(self.isChangingLanguage)
-  }
-
-  private static func markOnboardingCompleteForEstablishedInstall() {
-    guard !UserDefaults.standard.bool(forKey: SharedKey.hasCompletedOnboarding) else { return }
-    let hasRecord = UserDefaults.standard.data(forKey: SharedKey.onboardingRecord) != nil
-    let hasModel = ModelVariant.allCases.contains(where: ModelStorageManager.isDownloaded)
-    let hasHistory = !((try? HistoryStore.shared.readRecords()) ?? []).isEmpty
-    guard
-      OnboardingGate.marksCompleteForEstablishedInstall(
-        hasRecord: hasRecord,
-        hasModel: hasModel,
-        hasHistory: hasHistory,
-      )
-    else {
-      return
-    }
-    UserDefaults.standard.set(true, forKey: SharedKey.hasCompletedOnboarding)
-  }
-
-  private static func configureDefaultLanguageIfNeeded() {
-    let defaults = UserDefaults.standard
-    guard defaults.string(forKey: SharedKey.appLanguage) == nil else { return }
-    defaults.set(
-      AppLanguageConfig.resolveLanguage(from: Locale.preferredLanguages),
-      forKey: SharedKey.appLanguage,
-    )
   }
 
   private func handleAppear() {

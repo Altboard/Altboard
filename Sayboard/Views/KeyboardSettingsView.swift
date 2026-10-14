@@ -31,5 +31,5 @@ struct KeyboardSettingsView: View {
   @AppStorage(SharedKey.keyboardHapticsEnabled, store: UserDefaults(suiteName: AppGroup.identifier))
   private var keyboardHapticsEnabled = true
   @AppStorage(SharedKey.needsInputModeSwitchKey, store: UserDefaults(suiteName: AppGroup.identifier))
-  private var needsInputModeSwitchKey = false
+  private var needsInputModeSwitchKey = true
 }
