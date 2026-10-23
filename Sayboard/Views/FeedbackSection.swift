@@ -33,7 +33,7 @@ struct FeedbackSection: View {
   }
 
   private static let footerMessage: LocalizedStringKey = """
-    Please report any bug you find. Sayboard has no analytics and no telemetry, \
+    Please report any bug you find. Altboard has no analytics and no telemetry, \
     so the only bugs we know about are the ones people report.
     """
 

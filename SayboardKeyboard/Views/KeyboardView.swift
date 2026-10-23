@@ -74,10 +74,10 @@ enum SetupBlocker {
 
   var message: LocalizedStringKey {
     switch self {
-    case .fullAccessMissing: "Full Access is disabled. Open the Sayboard app for setup instructions"
-    case .micDenied: "Microphone is disabled. Allow Sayboard microphone access to recognize your speech"
+    case .fullAccessMissing: "Full Access is disabled. Open the Altboard app for setup instructions"
+    case .micDenied: "Microphone is disabled. Allow Altboard microphone access to recognize your speech"
     case .noModel: "No speech model yet. Download a speech model to start using voice input"
-    case .modelRemovedByUpdate: "Parakeet v3 was updated. Open Sayboard to download it again"
+    case .modelRemovedByUpdate: "Parakeet v3 was updated. Open Altboard to download it again"
     }
   }
 

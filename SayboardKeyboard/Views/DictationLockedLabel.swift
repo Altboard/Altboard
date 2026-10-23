@@ -3,7 +3,7 @@ import SwiftUI
 
 struct DictationLockedLabel: View {
   var body: some View {
-    Text("Free dictation is used up. Open Sayboard to continue")
+    Text("Free dictation is used up. Open Altboard to continue")
       .multilineTextAlignment(.center)
       .fixedSize(horizontal: false, vertical: true)
       .font(.subheadline.weight(.semibold))

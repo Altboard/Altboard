@@ -184,7 +184,7 @@ struct SettingsView: View, Equatable {
       Text("\u{26A0}\u{FE0F} Action Required")
     } footer: {
       if !self.setupChecklist.isComplete {
-        Text("Sayboard won’t work until these settings are configured")
+        Text("Altboard won’t work until these settings are configured")
       }
     }
   }

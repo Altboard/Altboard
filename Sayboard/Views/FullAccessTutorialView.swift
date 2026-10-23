@@ -65,7 +65,7 @@ struct FullAccessTutorialView: View {
           .padding(.leading, 16)
 
         self.toggleRow(
-          title: "Sayboard",
+          title: "Altboard",
           isOn: self.sayboardToggleOn,
           id: RowID.sayboardToggle,
         )
@@ -90,7 +90,7 @@ struct FullAccessTutorialView: View {
     VStack(spacing: 0) {
       self.keyboardsRow
       Divider()
-      self.toggleRow(title: "Sayboard", isOn: false, id: RowID.sayboardToggle)
+      self.toggleRow(title: "Altboard", isOn: false, id: RowID.sayboardToggle)
       if self.includeFullAccessRow {
         Divider()
         self.toggleRow(title: "Allow Full Access", isOn: false, id: RowID.fullAccessToggle)

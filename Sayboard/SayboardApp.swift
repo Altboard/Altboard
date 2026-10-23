@@ -156,6 +156,7 @@ struct SayboardApp: App {
     PurchaseService.shared.start()
     #endif
     Self.markOnboardingCompleteForEstablishedInstall()
+    NewNameNotice().settleAtLaunch()
   }
 
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate

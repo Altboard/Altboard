@@ -153,7 +153,7 @@ private struct OnboardingPracticeFieldView: View {
     OnboardingScreen {
       OnboardingHeader(
         title: "Switch the Keyboard",
-        subtitle: "Touch and hold \(Image(systemName: "globe")), then choose Sayboard.",
+        subtitle: "Touch and hold \(Image(systemName: "globe")), then choose Altboard.",
       )
       KeyboardSwitchTutorialView()
         .padding(.vertical, Self.fieldTopPadding)

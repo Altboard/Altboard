@@ -2,10 +2,10 @@ import Foundation
 
 enum SupportLinks {
 
-  static let supportAddress = "support@sayboard.app"
+  static let supportAddress = "support@altboard.app"
 
   static var newIssueURL: URL? {
-    var components = URLComponents(string: "https://github.com/stanlsv/sayboard/issues/new")
+    var components = URLComponents(string: "https://github.com/Altboard/Altboard/issues/new")
     components?.queryItems = [
       URLQueryItem(name: "title", value: Self.subject),
       URLQueryItem(name: "body", value: Self.body),
@@ -24,7 +24,7 @@ enum SupportLinks {
     return components.url
   }
 
-  private static let subject = "Sayboard bug report"
+  private static let subject = "Altboard bug report"
 
   private static var body: String {
     """
@@ -35,7 +35,7 @@ enum SupportLinks {
 
 
     ---
-    Sayboard \(self.appVersion)
+    Altboard \(self.appVersion)
     iOS \(self.systemVersion)
     \(self.deviceIdentifier)
     """

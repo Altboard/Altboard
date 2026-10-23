@@ -5,12 +5,12 @@
 
 <div align="center">
 
-# Sayboard
+# Altboard
 
 </div>
 
 <p align="center">
-  This repository contains the complete source code of Sayboard — privacy-first voice keyboard for iPhone and iPad. All speech recognition runs on-device with no servers, no accounts, and no tracking.
+  This repository contains the complete source code of Altboard — privacy-first voice keyboard for iPhone and iPad. All speech recognition runs on-device with no servers, no accounts, and no tracking.
 </p>
 
 <p align="center">
@@ -37,7 +37,7 @@
 
 ## Supported Languages
 
-Sayboard supports 90+ languages with automatic language detection:
+Altboard supports 90+ languages with automatic language detection:
 
 🇦🇫 🇦🇱 🇦🇩 🇦🇲 🇦🇿 🇧🇩 🇧🇾 🇧🇦 🇧🇬 🇰🇭 <br />
 🇨🇳 🇨🇩 🇭🇷 🇨🇿 🇩🇰 🇪🇪 🇪🇹 🇫🇴 🇫🇮 🇫🇷 <br />
@@ -93,7 +93,7 @@ To get started, you need a [Mac](https://www.apple.com/mac/), [Xcode](https://de
 
 1. Build and Run (Cmd+R)
 
-A build you make yourself is the full app: Run, Test and the Release configuration have no purchase screen and no limit on dictation. The App Store version gives 3,000 free words of dictation and then asks for a one-time purchase. That purchase is a way to support Sayboard's development, and if you can't or would rather not pay, building it yourself is free and always will be.
+A build you make yourself is the full app: Run, Test and the Release configuration have no purchase screen and no limit on dictation. The App Store version gives 3,000 free words of dictation and then asks for a one-time purchase. That purchase is a way to support Altboard's development, and if you can't or would rather not pay, building it yourself is free and always will be.
 
 In the `Sayboard` scheme, only Product › Archive uses the `AppStore` configuration, which compiles the purchase code. To archive a build for your own devices, set `config: Release` under `schemes` › `Sayboard` › `archive` in `project.yml` and run `xcodegen generate` again; a change made in Xcode's scheme editor is lost on the next generate. Otherwise the archive treats your install as a free App Store download, and your own bundle ID has no purchase that could unlock it. The `Sayboard StoreKit` scheme builds that App Store version for Run, Profile, Analyze and Archive, and runs the purchase flow locally against `StoreKit/Sayboard.storekit`.
 
@@ -101,9 +101,9 @@ In the `Sayboard` scheme, only Product › Archive uses the `AppStore` configura
 
 Settings has a Report a Problem section that opens either a prefilled GitHub issue or a prefilled email, whichever you prefer. Both carry the app version, the iOS version and the device identifier, so the report arrives ready to work on.
 
-You can also write directly to [support@sayboard.app](mailto:support@sayboard.app).
+You can also write directly to [support@altboard.app](mailto:support@altboard.app).
 
-Sayboard doesn't collect any analytics or telemetry, so we rely on your feedback to find and fix problems.
+Altboard doesn't collect any analytics or telemetry, so we rely on your feedback to find and fix problems.
 
 ## Source Code Release Policy
 
@@ -115,9 +115,9 @@ We welcome contributions via GitHub pull requests. For bug fixes and small impro
 
 ## License
 
-Sayboard is licensed under the [GNU General Public License v3](LICENSE).
+Altboard is licensed under the [GNU General Public License v3](LICENSE).
 
-    Copyright (c) 2025 Sayboard
+    Copyright (c) 2025 Altboard
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or

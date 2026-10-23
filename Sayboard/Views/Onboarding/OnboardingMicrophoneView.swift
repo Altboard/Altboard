@@ -11,7 +11,7 @@ struct OnboardingMicrophoneView: View {
       OnboardingHeader(
         title: "Microphone Access",
         subtitle: """
-          Sayboard needs the microphone to turn your speech into text. \
+          Altboard needs the microphone to turn your speech into text. \
           Audio is processed only on this device and is never sent anywhere.
           """,
       )

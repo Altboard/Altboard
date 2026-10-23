@@ -51,6 +51,7 @@ struct MainTabView: View {
     case noModel
     case modelRemovedByUpdate
     case freeDictationUsedUp
+    case newName
 
     var title: LocalizedStringKey {
       switch self {
@@ -60,17 +61,19 @@ struct MainTabView: View {
       case .noModel: "No Model Installed"
       case .modelRemovedByUpdate: "Model Update Required"
       case .freeDictationUsedUp: "Free Dictation Used Up"
+      case .newName: "We’re Now Altboard"
       }
     }
 
     var subtitle: LocalizedStringKey {
       switch self {
-      case .micDenied: "Enable microphone access so Sayboard can hear you. Your audio never leaves your device."
-      case .keyboardMissing: "Sayboard needs to be added as a keyboard to use voice dictation in any app."
-      case .fullAccessMissing: "Sayboard needs Full Access to hear your voice from the keyboard."
+      case .micDenied: "Enable microphone access so Altboard can hear you. Your audio never leaves your device."
+      case .keyboardMissing: "Altboard needs to be added as a keyboard to use voice dictation in any app."
+      case .fullAccessMissing: "Altboard needs Full Access to hear your voice from the keyboard."
       case .noModel: "Download a speech recognition model to start using voice input."
       case .modelRemovedByUpdate: "Parakeet v3 has been updated and needs to be downloaded again."
-      case .freeDictationUsedUp: "Support Sayboard with a one-time purchase to keep dictating."
+      case .freeDictationUsedUp: "Support Altboard with a one-time purchase to keep dictating."
+      case .newName: "Nothing else changes. In your keyboard list, look for Altboard."
       }
     }
   }
@@ -203,6 +206,7 @@ struct MainTabView: View {
 
   private static func banner(for checklist: SetupChecklist, isDictationLocked: Bool) -> SetupBanner? {
     guard UserDefaults.standard.bool(forKey: SharedKey.hasCompletedOnboarding) else { return nil }
+    if NewNameNotice().isDue { return .newName }
     let postponed = OnboardingRecordStore().load().postponedSteps
     if !checklist.microphoneGranted, !postponed.contains(.microphone) { return .micDenied }
     if !checklist.keyboardAdded, !postponed.contains(.keyboard) { return .keyboardMissing }
@@ -218,7 +222,7 @@ struct MainTabView: View {
     case .micDenied: .microphone
     case .keyboardMissing: .addKeyboard
     case .fullAccessMissing: .fullAccess
-    case .noModel, .modelRemovedByUpdate, .freeDictationUsedUp: nil
+    case .noModel, .modelRemovedByUpdate, .freeDictationUsedUp, .newName: nil
     }
   }
 
@@ -261,6 +265,14 @@ struct MainTabView: View {
         },
       ]
 
+    case .newName:
+      [
+        SetupBannerAction(title: "Continue", style: .primary) {
+          NewNameNotice().markDone()
+          self.activeBanner = self.recheckBanner()
+        }
+      ]
+
     case .micDenied, .keyboardMissing, .fullAccessMissing:
       [
         SetupBannerAction(title: "Open Settings", style: .primary) {
@@ -283,7 +295,7 @@ struct MainTabView: View {
       AnyView(FullAccessTutorialView(includeFullAccessRow: false))
     case .fullAccessMissing:
       AnyView(FullAccessTutorialView())
-    case .noModel, .modelRemovedByUpdate, .freeDictationUsedUp:
+    case .noModel, .modelRemovedByUpdate, .freeDictationUsedUp, .newName:
       nil
     }
   }

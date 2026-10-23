@@ -71,14 +71,14 @@ struct PaywallView: View {
 
   private static let pitch: LocalizedStringKey = """
     A one-time purchase unlocks unlimited dictation and AI text processing for good \
-    and supports Sayboard’s development.
+    and supports Altboard’s development.
     """
 
   private static let sourceCodeMessage: LocalizedStringKey = """
-    Sayboard is open source. If you would rather not pay, you can build it yourself for free.
+    Altboard is open source. If you would rather not pay, you can build it yourself for free.
     """
 
-  private static let sourceCodeURL = URL(string: "https://github.com/stanlsv/sayboard")
+  private static let sourceCodeURL = URL(string: "https://github.com/Altboard/Altboard")
   private static let productRetryDelay = Duration.seconds(5)
 
   @Environment(\.dismiss) private var dismiss
@@ -95,7 +95,7 @@ struct PaywallView: View {
         .font(.system(size: 56))
         .foregroundStyle(.pink)
         .accessibilityHidden(true)
-      Text("Support Sayboard")
+      Text("Support Altboard")
         .font(.largeTitle.bold())
       Text(Self.pitch)
         .foregroundStyle(.secondary)
