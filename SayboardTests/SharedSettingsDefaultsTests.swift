@@ -37,6 +37,7 @@ struct SharedSettingsDefaultsTests {
 
     #expect(settings.showGlobeKey)
     #expect(settings.keyboardHapticsEnabled)
+    #expect(settings.periodShortcutEnabled)
   }
 
   private static func uniqueSuiteName() -> String {

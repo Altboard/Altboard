@@ -120,7 +120,7 @@ struct KeyboardBottomRow: View {
 
       SpaceBarKey(
         useCustomSpaceBar: self.keyboardState.useCustomSpaceBar,
-        onSpace: { self.proxy.insertText(" ") },
+        onSpace: { self.proxy.insertSpace() },
         onCursorMove: { self.proxy.adjustTextPosition($0) },
       )
 

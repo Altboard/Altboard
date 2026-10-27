@@ -43,6 +43,7 @@ extension View {
 
 struct KeyboardProxy {
   let insertText: (String) -> Void
+  let insertSpace: () -> Void
   let deleteBackward: () -> Void
   let deleteAll: () -> Void
   let advanceToNextInputMode: () -> Void

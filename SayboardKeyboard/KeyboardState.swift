@@ -30,6 +30,7 @@ final class KeyboardState: ObservableObject {
   @Published var disabledLLMActions = Set<LLMAction>()
   @Published var llmTextHistory = [String]()
   @Published var llmHistoryIndex = -1
+  var llmHistorySuffix = ""
   @Published var showLLMActions = false
   @Published var llmError: LLMError?
   @Published var dictationOutcome: DictationOutcome?
@@ -61,6 +62,7 @@ final class KeyboardState: ObservableObject {
   func clearLLMHistory() {
     self.llmTextHistory = []
     self.llmHistoryIndex = -1
+    self.llmHistorySuffix = ""
   }
 
   func bootstrapLayoutSettings() {

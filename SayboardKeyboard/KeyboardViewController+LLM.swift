@@ -132,7 +132,7 @@ extension KeyboardViewController {
 
   private func insertPendingAutoActionFallback() {
     guard let fallbackText = self.pendingAutoActionText else { return }
-    textDocumentProxy.insertText(fallbackText)
+    self.keyboardState.llmHistorySuffix = self.insertSpacedText(fallbackText).trailing
     self.copyFinalTextToClipboardIfEnabled(fallbackText)
     self.pendingAutoActionText = nil
   }
@@ -160,7 +160,14 @@ extension KeyboardViewController {
       textDocumentProxy.deleteBackward()
     }
 
-    textDocumentProxy.insertText(result)
+    if expected.isEmpty {
+      self.keyboardState.llmHistorySuffix = self.insertSpacedText(result).trailing
+    } else {
+      let suffix = self.keyboardState.llmHistorySuffix
+      let kept = expected.hasSuffix(suffix) ? suffix : ""
+      textDocumentProxy.insertText(result + kept)
+      self.keyboardState.llmHistorySuffix = kept
+    }
     self.copyFinalTextToClipboardIfEnabled(result)
 
     self.keyboardState.llmTextHistory.append(result)
@@ -180,7 +187,8 @@ extension KeyboardViewController {
 
   private func navigateLLMHistory(to targetIndex: Int) {
     let currentIndex = self.keyboardState.llmHistoryIndex
-    let currentExpected = self.keyboardState.llmTextHistory[currentIndex]
+    let suffix = self.keyboardState.llmHistorySuffix
+    let currentExpected = self.keyboardState.llmTextHistory[currentIndex] + suffix
 
     let beforeText = textDocumentProxy.documentContextBeforeInput ?? ""
     guard beforeText == currentExpected else {
@@ -196,7 +204,7 @@ extension KeyboardViewController {
       textDocumentProxy.deleteBackward()
     }
 
-    textDocumentProxy.insertText(targetText)
+    textDocumentProxy.insertText(targetText + suffix)
     self.copyFinalTextToClipboardIfEnabled(targetText)
     self.keyboardState.llmHistoryIndex = targetIndex
 

@@ -195,6 +195,11 @@ struct SharedSettings {
     nonmutating set { defaults.set(newValue, forKey: SharedKey.keyboardHapticsEnabled) }
   }
 
+  var periodShortcutEnabled: Bool {
+    get { self.defaults.bool(forKey: SharedKey.periodShortcutEnabled) }
+    nonmutating set { defaults.set(newValue, forKey: SharedKey.periodShortcutEnabled) }
+  }
+
   var alsoCopyToClipboard: Bool {
     get { self.defaults.bool(forKey: SharedKey.alsoCopyToClipboard) }
     nonmutating set { defaults.set(newValue, forKey: SharedKey.alsoCopyToClipboard) }
@@ -431,5 +436,6 @@ struct SharedSettings {
     SharedKey.showGlobeKey: true,
     SharedKey.keyboardHapticsEnabled: true,
     SharedKey.needsInputModeSwitchKey: true,
+    SharedKey.periodShortcutEnabled: true,
   ])
 }

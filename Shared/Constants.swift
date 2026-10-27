@@ -98,6 +98,7 @@ enum SharedKey {
   static let alsoCopyToClipboard = "alsoCopyToClipboard"
   static let keyboardKind = "keyboardKind"
   static let keyboardHapticsEnabled = "keyboardHapticsEnabled"
+  static let periodShortcutEnabled = "periodShortcutEnabled"
   static let entitlementStatus = "entitlementStatus"
   static let entitlementEnvironment = "entitlementEnvironment"
   static let freeWordsUsed = "freeWordsUsed"

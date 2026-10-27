@@ -9393,6 +9393,185 @@
         }
       }
     },
+    "“.” Shortcut" : {
+      "comment" : "Apple's own label for the same iOS switch (PERIOD_SHORTCUT in KeyboardSettings, iOS 26.3.1), copied per locale. iOS has no et or lv; see the glossary for their source.",
+      "localizations" : {
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бърза команда „.“"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klávesová zkratka „.“"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“.”-genvej"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„.“-Kurzbefehl"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Συντόμευση «.»"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atajo de “.”"
+          }
+        },
+        "et" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Punkt tühikuklahviga"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "”.”-oikotie"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raccourci « . »"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पूर्ण विराम शॉर्टकट"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“.” prečac"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„.” gyorsbevitele"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbreviazione “.”"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ピリオドの簡易入力"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "‘.’ 단축키"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„.“ spartusis klavišas"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Punkts ar atstarpes taustiņu"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "«.»-snarvei"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sneltoets voor punt"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skrót „.”"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atalho “.”"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scurtătură „.”"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Быстрая клавиша «.»"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skratka „ . “"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bližnjica ».«"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "”.”-kortkommando"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“.” Kestirmesi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спрощення «.»"
+          }
+        },
+        "zh" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "句号快捷键"
+          }
+        }
+      }
+    },
     "“%@” would like to access the Microphone." : {
       "comment" : "Onboarding mock of the system microphone prompt: Apple's own wording (TCC.framework, iOS 26.3); iOS has no et/lv, so those stay English",
       "localizations" : {
@@ -27635,6 +27814,185 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "完成"
+          }
+        }
+      }
+    },
+    "Double tapping the space bar will insert a period followed by a space." : {
+      "comment" : "Apple's own footer for the same iOS switch (PERIOD_SHORTCUT_DESCRIPTION in KeyboardSettings, iOS 26.3.1), copied per locale. iOS has no et or lv; see the glossary for their source.",
+      "localizations" : {
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Двукратното докосване на клавиш Интервал ще въведе точка, следвана от интервал."
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poklepáním na mezerník se vloží tečka a mezera."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hvis du trykker to gange på mellemrum, indsættes der et punktum efterfulgt af et mellemrum."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durch Doppeltippen der Leertaste wird ein Punkt mit nachfolgendem Leerzeichen eingesetzt."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Αν αγγίξετε δύο φορές το πλήκτρο διαστήματος, θα εισαχθεί τελεία και μετά διάστημα."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al tocar dos veces la barra espaciadora se insertará un punto seguido de un espacio."
+          }
+        },
+        "et" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tühikuklahvi kaks korda puudutades sisestatakse punkt ja tühik."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Välilyöntinäppäimen kaksoisnapautus lisää pisteen ja välilyönnin."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un double-clic sur la barre d’espace insère un point suivi d’une espace."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "स्पेस बार पर डबल टैप करने पर पूर्ण विराम तथा स्पेस डाले जाएँगे।"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dvostruki dodir razmaknice umeće točku i razmak."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szóközbillentyűre való dupla koppintás beszúr egy pontot, melyet szóköz követ."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il doppio tocco sulla barra spaziatrice inserirà un punto seguito da uno spazio."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "spaceキーをダブルタップでピリオドと空白を入力します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스페이스 바를 두 번 탭하면 마침표와 간격을 차례로 삽입합니다."
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dukart bakstelėjus tarpo mygtuką bus įvestas taškas, o po jo – tarpas."
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divreiz pieskaroties atstarpes taustiņam, ievada punktu un atstarpi."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dobbelttrykk på mellomromstasten setter inn punktum etterfulgt av mellomrom."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tik dubbel op de spatiebalk om een punt gevolgd door een spatie te typen."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dwukrotne stuknięcie w spację powoduje wstawienie kropki i spacji."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se você tocar na barra de espaço duas vezes, um ponto seguido por um espaço será inserido."
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apăsarea dublă pe bara de spațiu va insera un punct urmat de un spațiu."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Двойное касание клавиши пробела вставляет точку с интервалом."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dvojitým klepnutím na medzerník vložíte bodku s medzerou."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Če preslednico dvakrat tapnete, boste vstavili piko s presledkom."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tryck snabbt två gånger på mellanslag för att infoga en punkt följd av ett mellanslag."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boşluk çubuğuna çift dokunma, bir nokta ve bir boşluk ekler."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подвійне натискання пробілу вставлятиме крапку з пробілом."
+          }
+        },
+        "zh" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轻点两下空格键插入句号（中文键盘）或句点与空格（其他键盘）。"
           }
         }
       }

@@ -14,6 +14,7 @@ final class KeyboardViewController: UIInputViewController {
   var llmOriginalText = ""
   var isPerformingHistoryNavigation = false
   var pendingAutoActionText: String?
+  var previousSpaceTap: PeriodShortcut.Tap?
 
   let keyboardState = KeyboardState()
 
@@ -109,7 +110,7 @@ final class KeyboardViewController: UIInputViewController {
     }
 
     DiagnosticLog.write("keyboard: inserting \(text.count) chars into textDocumentProxy")
-    textDocumentProxy.insertText(text)
+    self.insertSpacedText(text)
     self.copyFinalTextToClipboardIfEnabled(text)
   }
 
@@ -435,12 +436,18 @@ extension KeyboardViewController {
   private func makeKeyboardProxy() -> KeyboardProxy {
     KeyboardProxy(
       insertText: { [weak self] text in
+        self?.previousSpaceTap = nil
         self?.textDocumentProxy.insertText(text)
       },
+      insertSpace: { [weak self] in
+        self?.insertSpace()
+      },
       deleteBackward: { [weak self] in
+        self?.previousSpaceTap = nil
         self?.textDocumentProxy.deleteBackward()
       },
       deleteAll: { [weak self] in
+        self?.previousSpaceTap = nil
         self?.deleteAllText()
       },
       advanceToNextInputMode: { [weak self] in
@@ -462,6 +469,7 @@ extension KeyboardViewController {
         self?.requestLLMProcessing(action: action, customPromptId: customPromptId)
       },
       adjustTextPosition: { [weak self] offset in
+        self?.previousSpaceTap = nil
         self?.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
       },
       undoLLM: { [weak self] in self?.undoLLM() },

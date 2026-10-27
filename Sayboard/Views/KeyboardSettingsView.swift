@@ -21,6 +21,11 @@ struct KeyboardSettingsView: View {
           Text("Display an extra globe key on the keyboard. Your device already provides one, so this is optional.")
         }
       }
+      Section {
+        Toggle("“.” Shortcut", isOn: self.$periodShortcutEnabled)
+      } footer: {
+        Text("Double tapping the space bar will insert a period followed by a space.")
+      }
     }
     .navigationTitle("Keyboard")
     .navigationBarTitleDisplayMode(.inline)
@@ -32,4 +37,6 @@ struct KeyboardSettingsView: View {
   private var keyboardHapticsEnabled = true
   @AppStorage(SharedKey.needsInputModeSwitchKey, store: UserDefaults(suiteName: AppGroup.identifier))
   private var needsInputModeSwitchKey = true
+  @AppStorage(SharedKey.periodShortcutEnabled, store: UserDefaults(suiteName: AppGroup.identifier))
+  private var periodShortcutEnabled = true
 }
